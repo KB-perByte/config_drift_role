@@ -1,0 +1,6 @@
+{% for key, item in config_data.items() %}
+{% if item.template is defined %}
+interf {{ key }}
+no source template {{ item.template }}
+{% endif %}
+{% endfor %}

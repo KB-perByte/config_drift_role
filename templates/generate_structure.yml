@@ -1,0 +1,13 @@
+---
+- example: "interface names"
+  getval: '(?P<c>interface)\s(?P<name>\S+)'
+  result:
+    "{{ name }}":
+      name: "{{ name }}"
+  shared: True
+
+- example: "template names"
+  getval: ' source template (?P<templt>\S+)'
+  result:
+    "{{ name }}":
+      template: "{{ templt }}"

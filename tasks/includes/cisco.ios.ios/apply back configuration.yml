@@ -1,0 +1,21 @@
+- name: Set interfaces facts from collected source of truth
+  ansible.builtin.set_fact:
+    intf_config: "{{ ((lookup('file','{{ playbook_dir }}/vars/intf.yml')) | from_yaml) }}"
+
+- name: Apply back interface configuration
+  cisco.ios.interfaces:
+    config: "{{ item.parsed }}"
+    state: replaced
+  loop: "{{ intf_config.results }}"
+  # check_mode: true
+
+- name: Set l2_interfaces facts from collected source of truth
+  ansible.builtin.set_fact:
+    l2_config: "{{ ((lookup('file','{{ playbook_dir }}/vars/l2.yml')) | from_yaml) }}"
+
+- name: Apply back l2_interface configuration
+  cisco.ios.l2_interfaces:
+    config: "{{ item.parsed }}"
+    state: replaced
+  loop: "{{ l2_config.results }}"
+  # check_mode: true

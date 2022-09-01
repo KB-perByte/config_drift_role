@@ -1,0 +1,30 @@
+- name: Fetch derived-config data
+  cisco.ios.ios_command:
+    commands: show derived-config | section ^interface
+  register: derived_config
+
+- name: Parse interfaces information with derived-config data
+  cisco.ios.interfaces:
+    running_config: "{{ item }}"
+    state: parsed
+  loop: "{{ derived_config.stdout }}"
+  register: intf_data
+
+- name: Store interface config as source of truth
+  ansible.builtin.copy:
+    content: "{{ intf_data | to_nice_yaml }}"
+    dest: "{{ playbook_dir }}/vars/intf.yml"
+    mode: 0644
+
+- name: Parse l2_interfaces information with derived-config data
+  cisco.ios.l2_interfaces:
+    running_config: "{{ item }}"
+    state: parsed
+  loop: "{{ derived_config.stdout }}"
+  register: l2_data
+
+- name: Store l2_interfaces config as source of truth
+  ansible.builtin.copy:
+    content: "{{ l2_data | to_nice_yaml }}"
+    dest: "{{ playbook_dir }}/vars/l2.yml"
+    mode: 0644
