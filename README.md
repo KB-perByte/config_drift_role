@@ -1,6 +1,6 @@
 # config_drift_l2_interfaces
 
-Ansible role to preserve configuration applied to interfaces using on box templating `source template`, by collecting the configuration converting it to structured data as source of truth, followed by negation of the source templates per interface and re-applying the configuration back to the device using resource modules.
+Ansible's role for preserve configuration applied to interfaces using on-box templating `source template`, by collecting the configuration converting it to structured data as source of truth, followed by negation of the source templates per interface and re-applying the configuration back to the device using resource modules.
 Helps migrating on box l2 & interface configuration from on box templates based configuration.
 
 ## Execution steps
@@ -13,8 +13,8 @@ Helps migrating on box l2 & interface configuration from on box templates based 
 
 ### Part 2
 
-- Identify the interfaces using templates using with `running-config`.
-- Generate a template based configuration for the interfaces using templates.
+- Identify the interfaces using templates using `running-config`.
+- Generate a template-based configuration for the interfaces using templates.
 - Negate the templates per interface using the config generated.
 
 ### Part 3
@@ -23,7 +23,7 @@ Helps migrating on box l2 & interface configuration from on box templates based 
 
 ## Example Playbook
 
-file : play.yml
+file: play.yml
 
 ```
   tasks:
