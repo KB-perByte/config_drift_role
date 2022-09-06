@@ -1,4 +1,4 @@
-# config_drift_l2_interfaces
+# config_drift_role
 
 Ansible's role for preserve configuration applied to interfaces using on-box templating `source template`, by collecting the configuration converting it to structured data as source of truth, followed by negation of the source templates per interface and re-applying the configuration back to the device using resource modules.
 Helps migrating on box l2 & interface configuration from on box templates based configuration.
@@ -29,7 +29,7 @@ file: play.yml
   tasks:
   - name: Build source of truth based on derived config
     ansible.builtin.include_role: &ref_role
-      name: config_drift_l2_interfaces
+      name: config_drift_role
     vars:
       action: build source of truth
 

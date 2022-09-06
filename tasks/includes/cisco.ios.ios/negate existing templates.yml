@@ -3,7 +3,7 @@
     command: show running-config | section ^interface
     parser:
       name: ansible.netcommon.native
-      template_path: "{{ playbook_dir }}/roles/config_drift_l2_interfaces/templates/generate_structure.yml"
+      template_path: "{{ playbook_dir }}/roles/config_drift_role/templates/generate_structure.yml"
     set_fact: config_data
 
 - name: Generate config lines to negate templates
@@ -13,7 +13,7 @@
     mode: 0777
   with_items:
     - {
-        src: "{{ playbook_dir }}/roles/config_drift_l2_interfaces/templates/l2_config_template.j2",
+        src: "{{ playbook_dir }}/roles/config_drift_role/templates/l2_config_template.j2",
         dest: "{{ playbook_dir }}/vars/interfaces_config.cfg",
       }
 
