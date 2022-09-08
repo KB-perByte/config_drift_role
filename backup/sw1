@@ -42,3 +42,33 @@ template interfTmplt1
 template interfTmplt2
  switchport trunk allowed vlan 13,23,400-408,411-413,415,418,982,986
  description This is a different rendered description
+
+interface Loopback888
+ description Configured by Ansible Team
+ no ip address
+ shutdown
+interface Loopback999
+ no ip address
+interface GigabitEthernet0/0
+ description Configured and Managed By Ansible Team
+ no switchport
+ ip address 10.8.38.76 255.255.255.0
+ negotiation auto
+interface GigabitEthernet0/1
+ description This is a rendered description
+ switchport access vlan 7
+ switchport trunk allowed vlan 11,12,59,67,75,77,81,100,400-408,411-413,415,418
+ switchport trunk allowed vlan add 982,986,988,993
+ switchport mode access
+ no negotiation auto
+ no keepalive
+interface GigabitEthernet0/2
+ description This is a different rendered description
+ switchport trunk allowed vlan 13,23,400-408,411-413,415,418,982,986
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ no keepalive
+interface Vlan10
+ shutdown

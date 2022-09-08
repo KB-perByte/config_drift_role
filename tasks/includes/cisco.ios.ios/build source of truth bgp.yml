@@ -1,0 +1,11 @@
+- name: Gather bgp_global information with bgp_global module
+  cisco.ios.bgp_global:
+    running_config: "{{ item }}"
+    state: gathered
+  register: bgp_data
+
+- name: Store interface config as source of truth
+  ansible.builtin.copy:
+    content: "{{ bgp_data | to_nice_yaml }}"
+    dest: "{{ playbook_dir }}/vars/R1bgp.yml"
+    mode: 0644

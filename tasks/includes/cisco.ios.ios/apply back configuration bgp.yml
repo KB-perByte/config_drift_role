@@ -1,0 +1,10 @@
+- name: Set interfaces facts from collected source of truth
+  ansible.builtin.set_fact:
+    intf_config: "{{ ((lookup('file', '{{ playbook_dir }}/vars/R1bgp.yml')) | from_yaml) }}"
+
+- name: Apply back bgp configuration
+  cisco.ios.bgp_global:
+    config: "{{ item.parsed }}"
+    state: replaced
+  loop: "{{ intf_config.results }}"
+  # check_mode: true
